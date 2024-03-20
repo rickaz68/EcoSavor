@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pantry Management</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .alert {
+            color: red;
+        }
+
+        .expiring-soon {
+            font-weight: normal;
+        }
+    </style>
+</head>
+<body>
+    <header class="hero">
+        <div class="container">
+            <div class="logo">
+                <img src="C:\Users\Ricar\Desktop\index.html\photos\Savor.png" alt="EcoSavor Solutions Logo">
+                <h1>EcoSavor Solutions</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="recipes.html">Recipes</a></li>
+                    <li><a href="pantry.html">Pantry</a></li>
+                    <li><a href="waste.html">Waste Reduction</a></li>
+                    <li><a href="community.html">Community</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="features.html">Features</a></li>
+                    <li><a href="pricing.html">Pricing</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="#" onclick="logout()">Logout</a></li> <!-- Logout link -->
+                </ul>
+            </nav>
+        </div>
+    </header>
+<body>
+    <main>
+        <section id="recipeSharing" class="section">
+            <div class="container">
+                <h2>Recipe Sharing</h2>
+                <!-- Form for recipe sharing -->
+                <!-- Include fields for recipe name, ingredients, instructions, and optional photo upload -->
+                <form id="recipeForm">
+                    <label for="recipeName">Recipe Name:</label><br>
+                    <input type="text" id="recipeName" name="recipeName" required><br>
+                    <label for="ingredients">Ingredients:</label><br>
+                    <textarea id="ingredients" name="ingredients" required></textarea><br>
+                    <label for="instructions">Instructions:</label><br>
+                    <textarea id="instructions" name="instructions" required></textarea><br>
+                    <input type="file" id="photo" name="photo" accept="image/*"><br> <!-- Assuming input type file for photo upload -->
+                    <button type="submit" onclick="submitRecipe()">Submit</button>
+                </form>
+            </div>
+        </section>
+
+        <section id="discussionForums" class="section">
+            <div class="container">
+                <h2>Discussion Forums</h2>
+                <!-- Forum threads -->
+                <!-- Allow users to create new threads and reply to existing ones -->
+                <form id="forumThreadForm">
+                    <label for="threadTitle">Thread Title:</label><br>
+                    <input type="text" id="threadTitle" name="threadTitle" required><br>
+                    <label for="threadContent">Thread Content:</label><br>
+                    <textarea id="threadContent" name="threadContent" required></textarea><br>
+                    <button type="submit" onclick="createForumThread()">Create Thread</button>
+                </form>
+            </div>
+        </section>
+
+        <section id="pollsSurveys" class="section">
+            <div class="container">
+                <h2>Polls and Surveys</h2>
+                <!-- Conduct polls and surveys -->
+                <!-- Display poll questions and options -->
+                <form id="pollForm">
+                    <p>How often do you cook at home?</p>
+                    <label><input type="radio" name="pollOption" value="daily"> Daily</label><br>
+                    <label><input type="radio" name="pollOption" value="weekly"> Weekly</label><br>
+                    <label><input type="radio" name="pollOption" value="monthly"> Monthly</label><br>
+                    <button type="submit" onclick="submitPollResponse()">Submit</button>
+                </form>
+            </div>
+        </section>
+
+        <section id="feedbackSuggestions" class="section">
+            <div class="container">
+                <h2>Feedback and Suggestions</h2>
+                <!-- Collect feedback from members -->
+                <!-- Include feedback forms and contact information -->
+                <form id="feedbackForm">
+                    <label for="feedback">Your Feedback:</label><br>
+                    <textarea id="feedback" name="feedback" required></textarea><br>
+                    <button type="submit" onclick="submitFeedback()">Submit</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 EcoSavor Solutions. All rights reserved.</p>
+            <address>
+                123 Main Street, City, Country
+            </address>
+            <div class="footer-links">
+                <a href="#">Terms of Service</a> | 
+                <a href="#">Privacy Policy</a>
+            </div>
+        </div>
+    </footer>
+<script>
+    // Function to handle recipe submission
+    function submitRecipe() {
+        // Get form values
+        const recipeName = document.getElementById("recipeName").value;
+        const ingredients = document.getElementById("ingredients").value;
+        const instructions = document.getElementById("instructions").value;
+        const photo = document.getElementById("photo").files[0]; // Assuming input type file for photo upload
+
+        // Add logic to handle recipe submission (e.g., send data to server, store in database)
+
+        // Clear form fields
+        document.getElementById("recipeForm").reset();
+
+        // Optional: Display success message or update UI
+        alert("Recipe submitted successfully!");
+    }
+
+    // Function to create a new forum thread
+    function createForumThread() {
+        // Get thread title and content
+        const threadTitle = document.getElementById("threadTitle").value;
+        const threadContent = document.getElementById("threadContent").value;
+
+        // Add logic to create a new thread (e.g., send data to server, store in database)
+
+        // Clear form fields
+        document.getElementById("forumThreadForm").reset();
+
+        // Optional: Display success message or update UI
+        alert("Thread created successfully!");
+    }
+
+    // Function to submit a poll response
+    function submitPollResponse() {
+        // Get selected option
+        const selectedOption = document.querySelector('input[name="pollOption"]:checked').value;
+
+        // Add logic to handle poll response (e.g., send data to server, store in database)
+
+        // Optional: Display success message or update UI
+        alert("Response submitted successfully!");
+    }
+
+    // Function to submit feedback or suggestion
+    function submitFeedback() {
+        // Get feedback/suggestion from user
+        const feedback = document.getElementById("feedback").value;
+
+        // Add logic to handle feedback (e.g., send data to server, store in database)
+
+        // Clear form field
+        document.getElementById("feedbackForm").reset();
+
+        // Optional: Display success message or update UI
+        alert("Feedback submitted successfully!");
+    }
+
+function logout() {
+            // Add logout logic here (e.g., clear session data or redirect to login page)
+            // For demonstration, redirect to login page after 1 second
+            setTimeout(() => {
+                window.location.href = "login.html"; // Redirect to login page
+            }, 1000);
+        }
+</script>
+
+</body>
+</html>

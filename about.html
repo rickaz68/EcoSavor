@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pantry Management</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .alert {
+            color: red;
+        }
+
+        .expiring-soon {
+            font-weight: normal;
+        }
+    </style>
+</head>
+<body>
+    <header class="hero">
+        <div class="container">
+            <div class="logo">
+                <img src="C:\Users\Ricar\Desktop\index.html\photos\Savor.png" alt="EcoSavor Solutions Logo">
+                <h1>EcoSavor Solutions</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="recipes.html">Recipes</a></li>
+                    <li><a href="pantry.html">Pantry</a></li>
+                    <li><a href="waste.html">Waste Reduction</a></li>
+                    <li><a href="community.html">Community</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="features.html">Features</a></li>
+                    <li><a href="pricing.html">Pricing</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="#" onclick="logout()">Logout</a></li> <!-- Logout link -->
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="about" class="section">
+            <div class="container">
+                <h2>About Us</h2>
+                <p>EcoSavor Solutions is dedicated to revolutionizing the way individuals and businesses manage food and beverage resources. Our mission is to empower users to make sustainable choices, reduce food waste, and optimize culinary experiences.</p>
+                <p>Founded in 2020, our team of passionate developers, designers, and food enthusiasts have created an innovative platform that integrates recipe management, pantry organization, and waste reduction tools into a seamless user experience.</p>
+                <h3>Our Mission</h3>
+                <p>Our mission is to empower individuals and businesses to make sustainable choices in managing food resources, thereby reducing food waste and optimizing culinary experiences. We strive to create a more sustainable future for all by providing innovative tools and solutions that promote mindful consumption and environmental responsibility.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 EcoSavor Solutions. All rights reserved.</p>
+            <address>
+                123 Main Street, City, Country
+            </address>
+            <div class="footer-links">
+                <a href="#">Terms of Service</a> | 
+                <a href="#">Privacy Policy</a>
+            </div>
+        </div>
+    </footer>
+<script> 
+function logout() {
+            // Add logout logic here (e.g., clear session data or redirect to login page)
+            // For demonstration, redirect to login page after 1 second
+            setTimeout(() => {
+                window.location.href = "login.html"; // Redirect to login page
+            }, 1000);
+        }
+</script>
+</body>
+</html>

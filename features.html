@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pantry Management</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .alert {
+            color: red;
+        }
+
+        .expiring-soon {
+            font-weight: normal;
+        }
+    </style>
+</head>
+<body>
+    <header class="hero">
+        <div class="container">
+            <div class="logo">
+                <img src="C:\Users\Ricar\Desktop\index.html\photos\Savor.png" alt="EcoSavor Solutions Logo">
+                <h1>EcoSavor Solutions</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="recipes.html">Recipes</a></li>
+                    <li><a href="pantry.html">Pantry</a></li>
+                    <li><a href="waste.html">Waste Reduction</a></li>
+                    <li><a href="community.html">Community</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="features.html">Features</a></li>
+                    <li><a href="pricing.html">Pricing</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="#" onclick="logout()">Logout</a></li> <!-- Logout link -->
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="features" class="section">
+            <div class="container">
+                <h2>Features</h2>
+                <p>Explore the features that make EcoSavor Solutions the ultimate tool for managing your food and beverage resources:</p>
+                
+                <table>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Home Plan</th>
+                        <th>Business Plan</th>
+                        <th>Enterprise Plan</th>
+                    </tr>
+                    <tr>
+                        <td>Recipe Management</td>
+                        <td>Access to a limited number of curated recipes and basic meal planning features.</td>
+                        <td>Unlock access to a vast library of curated recipes, advanced meal planning tools, and collaboration features for team use.</td>
+                        <td>Customizable recipe management solutions tailored to the specific needs of large-scale businesses, including API access and integration options.</td>
+                    </tr>
+                    <tr>
+                        <td>Pantry Management</td>
+                        <td>Basic pantry organization tools with limited notification features.</td>
+                        <td>Advanced pantry management tools with customizable notification settings and team collaboration features.</td>
+                        <td>Scalable pantry management solutions with enhanced analytics and integration options for large-scale operations.</td>
+                    </tr>
+                    <tr>
+                        <td>Waste Reduction Tools</td>
+                        <td>Basic waste reduction tools with limited insights and recommendations.</td>
+                        <td>Advanced waste reduction tools with detailed analytics, predictive modeling, and customizable recommendations for business operations.</td>
+                        <td>Customizable waste reduction solutions tailored to the specific needs of large-scale operations, including data-driven insights and integration options.</td>
+                    </tr>
+                    <tr>
+                        <td>Community Engagement</td>
+                        <td>Basic access to community features and challenges.</td>
+                        <td>Enhanced community engagement tools with collaboration features and exclusive challenges for business teams.</td>
+                        <td>Customizable community engagement solutions for large-scale organizations, including branded challenges and integration options with existing platforms.</td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 EcoSavor Solutions. All rights reserved.</p>
+            <address>
+                123 Main Street, City, Country
+            </address>
+            <div class="footer-links">
+                <a href="#">Terms of Service</a> | 
+                <a href="#">Privacy Policy</a>
+            </div>
+        </div>
+    </footer>
+<script>
+function logout() {
+            // Add logout logic here (e.g., clear session data or redirect to login page)
+            // For demonstration, redirect to login page after 1 second
+            setTimeout(() => {
+                window.location.href = "login.html"; // Redirect to login page
+            }, 1000);
+        }
+</script>
+</body>
+</html>

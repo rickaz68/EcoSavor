@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pantry Management</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .alert {
+            color: red;
+        }
+
+        .expiring-soon {
+            font-weight: normal;
+        }
+	a{
+	color: red;
+}
+    </style>
+</head>
+<body>
+    <header class="hero">
+        <div class="container">
+            <div class="logo">
+                <img src="C:\Users\Ricar\Desktop\index.html\photos\Savor.png" alt="EcoSavor Solutions Logo">
+                <h1>EcoSavor Solutions</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="recipes.html">Recipes</a></li>
+                    <li><a href="pantry.html">Pantry</a></li>
+                    <li><a href="waste.html">Waste Reduction</a></li>
+                    <li><a href="community.html">Community</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="features.html">Features</a></li>
+                    <li><a href="pricing.html">Pricing</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="#" onclick="logout()">Logout</a></li> <!-- Logout link -->
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="pantry" class="section">
+            <div class="container">
+                <h2>Pantry Management</h2>
+                <p>Efficiently organize your pantry, receive notifications for expiring items, and avoid unnecessary purchases by knowing exactly what you have on hand.</p>
+                <p>Minimize food waste and save time and money on grocery shopping, ensuring that you always have the ingredients you need for your next meal.</p>
+                <table id="inventory-table">
+                    <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Name</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th>Purchase Date</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="inventory-body">
+                        <!-- Table body will be dynamically added here -->
+                    </tbody>
+                </table>
+
+                <h3>Add/Edit Ingredient:</h3>
+                <div id="add-edit-ingredient-form">
+                    <input type="text" id="ingredient-name" placeholder="Enter ingredient name">
+                    <input type="number" id="ingredient-quantity" placeholder="Enter quantity">
+                    <input type="date" id="ingredient-date" placeholder="Enter purchase date">
+                    <input type="number" id="ingredient-price" placeholder="Enter price">
+                    <select id="ingredient-type">
+                        <option value="Dry">Dry</option>
+                        <option value="Protein">Protein</option>
+                        <option value="Dairy">Dairy</option>
+                        <option value="Produce">Produce</option>
+                        <option value="Canned Product">Canned Product</option>
+                        <option value="Spice">Spice</option>
+                    </select>
+                    <button id="add-edit-button" onclick="addOrEditIngredient()">Save</button>
+                </div>
+                
+                <h3>Alerts:</h3>
+                <div id="alerts">
+                    <ul id="expired-alerts">
+                        <!-- Expired alerts will be dynamically added here -->
+                    </ul>
+                    <ul id="expiring-soon-alerts">
+                        <!-- Expiring soon alerts will be dynamically added here -->
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 EcoSavor Solutions. All rights reserved.</p>
+            <address>
+                123 Main Street, City, Country
+            </address>
+            <div class="footer-links">
+                <a href="#">Terms of Service</a> | 
+                <a href="#">Privacy Policy</a>
+            </div>
+        </div>
+    </footer>
+
+   <script>
+        let inventory = JSON.parse(localStorage.getItem('inventory')) || [];
+
+        function displayInventory() {
+            const inventoryBody = document.getElementById("inventory-body");
+            inventoryBody.innerHTML = '';
+
+            const inventoryByType = {};
+            inventory.forEach(item => {
+                if (!inventoryByType[item.type]) {
+                    inventoryByType[item.type] = [];
+                }
+                inventoryByType[item.type].push(item);
+            });
+
+            Object.values(inventoryByType).forEach(typeInventory => {
+                typeInventory.sort((a, b) => new Date(a.purchaseDate) - new Date(b.purchaseDate));
+            });
+
+            Object.keys(inventoryByType).forEach((type, index) => {
+                const typeInventory = inventoryByType[type];
+                typeInventory.forEach((item, itemIndex) => {
+                    const row = document.createElement("tr");
+                    if (itemIndex === 0) {
+                        row.innerHTML = `
+                            <td rowspan="${typeInventory.length}">${item.type}</td>
+                            <td>${item.name}</td>
+                            <td>${item.quantity}</td>
+                            <td>$${(item.price / item.quantity).toFixed(2)}</td>
+                            <td>${item.purchaseDate}</td>
+                            <td>
+                                <button onclick="editIngredient('${item.name}')">Edit</button>
+                                <button onclick="deleteIngredient('${item.name}')">Delete</button>
+                            </td>
+                        `;
+                    } else {
+                        row.innerHTML = `
+                            <td>${item.name}</td>
+                            <td>${item.quantity}</td>
+                            <td>$${(item.price / item.quantity).toFixed(2)}</td>
+                            <td>${item.purchaseDate}</td>
+                            <td>
+                                <button onclick="editIngredient('${item.name}')">Edit</button>
+                                <button onclick="deleteIngredient('${item.name}')">Delete</button>
+                            </td>
+                        `;
+                    }
+                    inventoryBody.appendChild(row);
+                });
+            });
+        }
+
+        function resetForm() {
+            document.getElementById('ingredient-name').value = '';
+            document.getElementById('ingredient-quantity').value = '';
+            document.getElementById('ingredient-date').value = '';
+            document.getElementById('ingredient-price').value = '';
+            document.getElementById('ingredient-type').value = 'Dry'; // Set default value
+            document.getElementById('add-edit-button').textContent = 'Save Edit'; // Reset button text
+        }
+
+        function addOrEditIngredient() {
+            const ingredientName = document.getElementById('ingredient-name').value.trim();
+            const ingredientQuantity = parseInt(document.getElementById('ingredient-quantity').value.trim());
+            const ingredientDate = document.getElementById('ingredient-date').value;
+            const ingredientPrice = parseFloat(document.getElementById('ingredient-price').value.trim());
+            const ingredientType = document.getElementById('ingredient-type').value;
+            
+            if (ingredientName !== '' && !isNaN(ingredientQuantity) && ingredientQuantity > 0 && ingredientDate !== '' && !isNaN(ingredientPrice) && ingredientPrice >= 0) {
+                const existingIngredientIndex = inventory.findIndex(item => item.name === ingredientName);
+                if (existingIngredientIndex !== -1) {
+                    // Editing existing ingredient
+                    const existingIngredient = inventory[existingIngredientIndex];
+                    existingIngredient.quantity = ingredientQuantity;
+                    existingIngredient.purchaseDate = ingredientDate;
+                    existingIngredient.price = ingredientPrice * ingredientQuantity; // Correct calculation of total price
+                    existingIngredient.type = ingredientType;
+                } else {
+                    // Adding new ingredient
+                    const newIngredient = {
+                        name: ingredientName,
+                        quantity: ingredientQuantity,
+                        purchaseDate: ingredientDate,
+                        price: ingredientPrice * ingredientQuantity, // Correct calculation of total price
+                        type: ingredientType
+                    };
+                    inventory.push(newIngredient);
+                }
+                localStorage.setItem('inventory', JSON.stringify(inventory));
+                displayInventory();
+                resetForm();
+                monitorExpirationDates(); // Call to update alerts after adding/editing an ingredient
+            } else {
+                alert('Please enter valid values for all fields.');
+            }
+        }
+
+        function editIngredient(name) {
+            const ingredient = inventory.find(item => item.name === name);
+            if (ingredient) {
+                document.getElementById('ingredient-name').value = ingredient.name;
+                document.getElementById('ingredient-quantity').value = ingredient.quantity;
+                document.getElementById('ingredient-date').value = ingredient.purchaseDate;
+                document.getElementById('ingredient-price').value = ingredient.price / ingredient.quantity;
+                document.getElementById('ingredient-type').value = ingredient.type;
+                document.getElementById('add-edit-button').textContent = 'Save Edit';
+                document.getElementById('add-edit-button').onclick = addOrEditIngredient;
+            }
+        }
+
+        function deleteIngredient(name) {
+            const index = inventory.findIndex(item => item.name === name);
+            if (index !== -1) {
+                inventory.splice(index, 1);
+                localStorage.setItem('inventory', JSON.stringify(inventory));
+                displayInventory();
+                monitorExpirationDates(); // Call to update alerts after deleting an ingredient
+            }
+        }
+
+        function monitorExpirationDates() {
+            const currentDate = new Date();
+            const expiredAlertsList = document.getElementById("expired-alerts");
+            const expiringSoonAlertsList = document.getElementById("expiring-soon-alerts");
+            expiredAlertsList.innerHTML = '';
+            expiringSoonAlertsList.innerHTML = '';
+
+            const expiredItems = [];
+            const expiringSoonItems = [];
+            inventory.forEach(item => {
+                const expirationDate = new Date(item.purchaseDate);
+                expirationDate.setDate(expirationDate.getDate() + 7);
+                const daysUntilExpiration = Math.ceil((expirationDate - currentDate) / (1000 * 60 * 60 * 24));
+                if ((item.type === "Dairy" || item.type === "Protein" || item.type === "Produce") && daysUntilExpiration < 0) {
+                    expiredItems.push(item);
+                } else if ((item.type === "Dairy" || item.type === "Protein" || item.type === "Produce") && daysUntilExpiration >= 0 && daysUntilExpiration <= 2) {
+                    expiringSoonItems.push({ item, daysUntilExpiration });
+                }
+            });
+
+            expiredItems.forEach(item => {
+                const li = document.createElement("li");
+                li.innerHTML = `<strong><a>${item.name} has expired. Discard soon.</a></strong>`;
+                expiredAlertsList.appendChild(li);
+            });
+
+            expiringSoonItems.forEach(({ item, daysUntilExpiration }) => {
+                const li = document.createElement("li");
+                li.classList.add('expiring-soon');
+                li.innerHTML = `${item.name} will expire in ${daysUntilExpiration} days. Use soon.`;
+                expiringSoonAlertsList.appendChild(li);
+            });
+        }
+
+        displayInventory();
+        monitorExpirationDates();
+
+        setInterval(monitorExpirationDates, 60000); // Update alerts every minute
+
+function logout() {
+            // Add logout logic here (e.g., clear session data or redirect to login page)
+            // For demonstration, redirect to login page after 1 second
+            setTimeout(() => {
+                window.location.href = "login.html"; // Redirect to login page
+            }, 1000);
+        }
+    </script>
+</body>
+</html>

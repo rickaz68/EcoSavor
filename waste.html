@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Waste Reduction - EcoSavor Solutions</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Additional styles specific to Waste Reduction section */
+        .waste-section {
+            background-color: #f8f9fa; /* Light gray background */
+            padding: 50px 0;
+        }
+
+        .waste-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .waste-header {
+            margin-bottom: 40px;
+        }
+
+        .waste-description {
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        .waste-actions {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .action-button {
+            padding: 15px 30px;
+            background-color: #007bff; /* Blue button color */
+            color: #fff; /* White text color */
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .action-button:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+    </style>
+</head>
+<body>
+    <header class="hero">
+        <div class="container">
+            <div class="logo">
+                <img src="C:\Users\Ricar\Desktop\index.html\photos\Savor.png" alt="EcoSavor Solutions Logo">
+                <h1>EcoSavor Solutions</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="recipes.html">Recipes</a></li>
+                    <li><a href="pantry.html">Pantry</a></li>
+                    <li><a href="waste.html">Waste Reduction</a></li>
+                    <li><a href="community.html">Community</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="features.html">Features</a></li>
+                    <li><a href="pricing.html">Pricing</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="#" onclick="logout()">Logout</a></li> <!-- Logout link -->
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+<body>
+    <div class="container">
+        <h2>Waste Management Dashboard</h2>
+        <p>Take control of your food waste with our Waste Reduction Tools. Gain valuable insights into your consumption patterns, track discarded items, and receive personalized recommendations for minimizing waste in your kitchen.</p>
+        <label for="goal-amount">Enter Waste Reduction Goal (kg):</label>
+        <input type="number" id="goal-amount" name="goal-amount" placeholder="Enter goal amount">
+        <button id="set-goal-btn">Set Waste Reduction Goal</button>
+        <button id="track-progress-btn">Track Progress</button>
+    </div>
+
+    <footer>
+        &copy; 2024 Waste Management Solutions. All rights reserved.
+    </footer>
+
+    <script>
+        // JavaScript logic
+        document.addEventListener('DOMContentLoaded', function() {
+            const setGoalBtn = document.getElementById('set-goal-btn');
+            const trackProgressBtn = document.getElementById('track-progress-btn');
+
+            setGoalBtn.addEventListener('click', function() {
+                const goalAmount = parseFloat(document.getElementById('goal-amount').value);
+                if (!isNaN(goalAmount) && goalAmount >= 0) {
+                    // Make an AJAX request to save the goal amount
+                    saveGoalAmount(goalAmount)
+                        .then(() => {
+                            alert(`Your waste reduction goal of ${goalAmount} kg has been set!`);
+                        })
+                        .catch(error => {
+                            console.error('Error saving goal amount:', error);
+                            alert('Failed to set the goal amount. Please try again later.');
+                        });
+                } else {
+                    alert('Please enter a valid goal amount.');
+                }
+            });
+
+            trackProgressBtn.addEventListener('click', function() {
+                // Make an AJAX request to retrieve progress data
+                getProgress()
+                    .then(progress => {
+                        alert(`Your current progress: ${progress.toFixed(2)} kg`);
+                    })
+                    .catch(error => {
+                        console.error('Error retrieving progress data:', error);
+                        alert('Failed to retrieve progress data. Please try again later.');
+                    });
+            });
+
+            function saveGoalAmount(goalAmount) {
+                // Simulate AJAX request to save goal amount (replace with actual AJAX code)
+                return new Promise((resolve, reject) => {
+                    setTimeout(() => {
+                        // Simulate successful response
+                        resolve();
+                    }, 1000);
+                });
+            }
+
+            function getProgress() {
+                // Simulate AJAX request to retrieve progress data (replace with actual AJAX code)
+                return new Promise((resolve, reject) => {
+                    setTimeout(() => {
+                        // Simulate successful response with progress data
+                        const progress = Math.random() * 100; // Random progress for demonstration
+                        resolve(progress);
+                    }, 1000);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
