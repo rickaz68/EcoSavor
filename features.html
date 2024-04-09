@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Features & Pricing</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+.logo img {
+    width: 50px;
+    height: 50px;
+    vertical-align: middle;
+}
+
+.logo h1 {
+    display: inline;
+    margin-left: 10px;
+}
+
+/* CSS for pricing cards */
+.pricing-plans {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.pricing-plan {
+    flex: 0 0 calc(33.333% - 20px); /* Adjust width as needed */
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s;
+    margin-bottom: 20px;
+}
+
+.pricing-plan:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.pricing-plan h3 {
+    margin-top: 0;
+    font-size: 24px;
+    color: #333;
+}
+
+.pricing-plan p.price {
+    font-size: 20px;
+    font-weight: bold;
+    color: #007bff;
+}
+
+.pricing-plan ul {
+    padding: 0;
+    margin: 15px 0;
+}
+
+.pricing-plan ul li {
+    list-style: none;
+    margin-bottom: 5px;
+    color: #666;
+}
+
+.pricing-plan button {
+    display: block;
+    width: 100%;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.pricing-plan button:hover {
+    background-color: #0056b3;
+}
+
+/* CSS for Why Choose EcoSavor Solutions section */
+/* CSS for Why Choose EcoSavor Solutions section */
+.why-choose-us {
+    margin-top: 50px;
+    background-color: #f9f9f9;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.why-choose-us h3 {
+    margin-top: 0;
+    font-size: 28px;
+    color: #333;
+}
+
+.why-choose-us p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #666;
+}
+
+.why-choose-us ul {
+    padding-left: 20px;
+    margin-top: 20px;
+}
+
+.why-choose-us ul li {
+    margin-bottom: 10px;
+    color: #444;
+}
+
+.why-choose-us ul li:before {
+    content: "\2022"; /* Bullet point */
+    color: #007bff;
+    font-weight: bold;
+    display: inline-block;
+    width: 1em;
+    margin-left: -1em;
+}
+
+.why-choose-us ul li:last-child {
+    margin-bottom: 0;
+}
+
+
+
+
+    </style>
+</head>
+<body>
+    <header class="hero">
+        <div class="container">
+            <div class="logo">
+                <img src="C:\Users\Ricar\Desktop\index.html\photos\Savor.png" alt="EcoSavor Solutions Logo">
+                <h1>EcoSavor Solutions</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="recipes.html">Recipes</a></li>
+                    <li><a href="pantry.html">Pantry</a></li>
+                    <li><a href="waste.html">Waste Reduction</a></li>
+                    <li><a href="community.html">Community</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="features.html">Features & Pricing</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="#" onclick="logout()">Logout</a></li> <!-- Logout link -->
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="features" class="section">
+            <div class="container">
+                <h2>Features</h2>
+                <p>Explore the features that make EcoSavor Solutions the ultimate tool for managing your food and beverage resources:</p>
+                
+                <table>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Home Plan</th>
+                        <th>Business Plan</th>
+                        <th>Enterprise Plan</th>
+                    </tr>
+                    <tr>
+                        <td>Recipe Management</td>
+                        <td>Access to a limited number of curated recipes and basic meal planning features.</td>
+                        <td>Unlock access to a vast library of curated recipes, advanced meal planning tools, and collaboration features for team use.</td>
+                        <td>Customizable recipe management solutions tailored to the specific needs of large-scale businesses, including API access and integration options.</td>
+                    </tr>
+                    <tr>
+                        <td>Pantry Management</td>
+                        <td>Basic pantry organization tools with limited notification features.</td>
+                        <td>Advanced pantry management tools with customizable notification settings and team collaboration features.</td>
+                        <td>Scalable pantry management solutions with enhanced analytics and integration options for large-scale operations.</td>
+                    </tr>
+                    <tr>
+                        <td>Waste Reduction Tools</td>
+                        <td>Basic waste reduction tools with limited insights and recommendations.</td>
+                        <td>Advanced waste reduction tools with detailed analytics, predictive modeling, and customizable recommendations for business operations.</td>
+                        <td>Customizable waste reduction solutions tailored to the specific needs of large-scale operations, including data-driven insights and integration options.</td>
+                    </tr>
+                    <tr>
+                        <td>Community Engagement</td>
+                        <td>Basic access to community features and challenges.</td>
+                        <td>Enhanced community engagement tools with collaboration features and exclusive challenges for business teams.</td>
+                        <td>Customizable community engagement solutions for large-scale organizations, including branded challenges and integration options with existing platforms.</td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+        <section id="pricing" class="section">
+            <div class="container">
+                <h2>Pricing</h2>
+                <p>Choose the plan that best fits your needs and budget:</p>
+                
+                <div class="pricing-plans">
+                    <div class="pricing-plan">
+                        <h3>Home Plan</h3>
+                        <p class="price">$4.99 per month</p>
+                        <ul>
+                            <li>Access to curated recipes</li>
+                            <li>Basic pantry organization tools</li>
+                            <li>Waste reduction insights</li>
+                            <li>Community engagement features</li>
+                        </ul>
+                        <button>Select Plan</button>
+                    </div>
+
+                    <div class="pricing-plan">
+                        <h3>Business Plan</h3>
+                        <p class="price">$150 per month</p>
+                        <ul>
+                            <li>Access to extensive recipe library</li>
+                            <li>Advanced pantry management</li>
+                            <li>Enhanced waste reduction tools</li>
+                            <li>Team collaboration features</li>
+                            <li>Premium customer support</li>
+                        </ul>
+                        <button>Select Plan</button>
+                    </div>
+
+                    <div class="pricing-plan">
+                        <h3>Enterprise Plan</h3>
+                        <p class="price">Custom Pricing</p>
+                        <ul>
+                            <li>Customizable recipe management solutions</li>
+                            <li>Scalable pantry management</li>
+                            <li>Custom waste reduction strategies</li>
+                            <li>Branded community engagement</li>
+                            <li>Integration options</li>
+                            <li>Priority support and dedicated account manager</li>
+                        </ul>
+                        <button>Contact Us</button>
+                    </div>
+                </div>
+                
+                <p>Unlock premium features and start your journey towards sustainable living today!</p>
+
+                <div class="why-choose-us">
+                    <h3>Why Choose EcoSavor Solutions?</h3>
+                    <p>With EcoSavor Solutions, you're not just getting a food management platform – you're joining a community committed to sustainability, efficiency, and culinary excellence. Here's why you should choose us:</p>
+                    <ul>
+                        <li>Comprehensive Solutions: Our platform offers all-in-one solutions for recipe management, pantry organization, and waste reduction, ensuring that you have everything you need to optimize your culinary experience.</li>
+                        <li>Personalized Experience: Whether you're a home cook, a small business owner, or a large-scale enterprise, our plans are tailored to meet your specific needs and scale with your growth.</li>
+                        <li>Expert Guidance: Gain access to valuable insights, recommendations, and best practices from our team of food waste experts, helping you make informed decisions and achieve your sustainability goals.</li>
+                        <li>Community Support: Join our vibrant community of eco-conscious food enthusiasts, share ideas, and collaborate on eco-friendly initiatives to create a more sustainable future together.</li>
+                        <li>Exceptional Value: With competitive pricing, flexible plans, and a wide range of features, EcoSavor Solutions offers exceptional value compared to other food management solutions on the market.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 EcoSavor Solutions. All rights reserved.</p>
+            <address>
+                123 Main Street, City, Country
+            </address>
+            <div class="footer-links">
+                <a href="#">Terms of Service</a> | 
+                <a href="#">Privacy Policy</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for logout -->
+    <script>
+        function logout() {
+            // Add logout logic here (e.g., clear session data or redirect to login page)
+            // For demonstration, redirect to login page after 1 second
+            setTimeout(() => {
+                window.location.href = "login.html"; // Redirect to login page
+            }, 1000);
+        }
+    </script>
+</body>
+</html>

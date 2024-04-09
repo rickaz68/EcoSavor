@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Management</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+
+        }
+
+.logo img {
+    width: 50px;
+    height: 50px;
+    vertical-align: middle;
+}
+
+.logo h1 {
+    display: inline;
+    margin-left: 10px;
+}
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .alert {
+            color: red;
+        }
+
+        .expiring-soon {
+            font-weight: normal;
+        }
+
+        /* Rounded corners for textarea */
+        textarea {
+            border-radius: 5px; /* Adjust the value as needed */
+        }
+      
+      .paste-section h3 {
+            margin-bottom: 20px;
+        }
+
+#scaling-factor {
+    display: block;
+    margin: 0 auto 20px; /* Center horizontally and add margin at the bottom */
+    padding: 10px;
+    border-radius: 10px;
+    width: 15%; /* Set the width of the input box */
+    box-sizing: border-box; /* Include padding in width calculation */
+}
+
+
+
+.textarea-container {
+    margin-bottom: 20px; /* Add some space between the textarea and the button */
+}
+#recipe-name {
+    margin-bottom: 20px; /* Add space below the Recipe Name input */
+}
+
+.recipe-description-label {
+    margin-top: 20px; /* Add space above the Recipe Description label */
+}
+
+
+       
+input[type="text"],
+textarea {
+    border-radius: 10px; /* Increase border radius for rounded corners */
+    padding: 10px;
+    margin-bottom: 20px;
+    width: calc(100%); /* Adjusted width */
+    box-sizing: border-box; /* Include padding in width calculation */
+    display: block; /* Center the input and textarea */
+    margin: 0 auto; /* Center the input and textarea */
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+}
+button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.section {
+    border-radius: .75rem;
+    background-size: cover;
+    cursor: pointer;
+    overflow: hidden;
+    border-radius: 2rem;
+    margin-right: 100px;
+margin-right: 100px; /* Set top and bottom margins to 10px and horizontally center the sections */
+    display: flex;
+    align-items: center;
+    transition: .6s cubic-bezier(.28,-0.03,0,.99);
+    box-shadow: 0px 10px 30px -5px rgba(0,0,0,0.8);
+    flex: 0 0 calc(40% - 20px); /* Make each section 50% width minus the margin */
+    margin-right: 20px;
+    padding: 20px;
+    box-sizing: border-box; /* Ensure padding is included in width calculation */
+}
+
+.sections-container {
+    display: flex;
+    justify-content: center; /* Distribute space between sections */
+}
+
+/* Apply specific styles for the paste-section if necessary */
+.paste-section {
+    background-color: #f9f9f9; /* Example background color */
+    /* Add any other specific styles */
+}
+
+#paste-section {
+    width: calc(50%); /* Set width for the paste section */
+    height: 500px; /* Set a fixed height for the paste section */
+    overflow: hidden; /* Hide overflow content */
+}
+#recipe-form,
+#paste-section {
+    display: flex;
+    margin-top: 10p;
+    justify-content: center; /* Center horizontally */
+}
+
+
+
+    </style>
+</head>
+<body>
+    <header class="hero">
+        <div class="container">
+            <div class="logo">
+                <img src="C:\Users\Ricar\Desktop\index.html\photos\Savor.png" alt="EcoSavor Solutions Logo">
+                <h1>EcoSavor Solutions</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="recipes.html">Recipes</a></li>
+                    <li><a href="pantry.html">Pantry</a></li>
+                    <li><a href="waste.html">Waste Reduction</a></li>
+                    <li><a href="community.html">Community</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="features.html">Features & Pricing</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="#" onclick="logout()">Logout</a></li> <!-- Logout link -->
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+<div class="sections-container">
+<section id="recipe-form" class="section">
+    <div class="container">
+        <h2>Add Recipe</h2>
+        <form id="new-recipe-form" onsubmit="saveRecipe(event)">
+            <label for="recipe-name">Recipe Name:</label>
+            <input type="text" id="recipe-name" name="recipe-name" required>
+            <label for="recipe-description" class="recipe-description-label">Recipe Description:</label>
+            <textarea id="recipe-description" name="recipe-description" rows="10" cols="50" required></textarea>
+            <h3>Ingredients:</h3>
+            <div id="ingredients-list">
+                <!-- Ingredients will be dynamically added here -->
+            </div>
+            <button type="button" id="add-ingredient-button">Add</button>
+            <button type="button" onclick="clearForm()">New</button>
+            <label for="scaling-factor">Scaling Factor:</label>
+            <input type="number" id="scaling-factor" name="scaling-factor" min="1" value="1" required> <!-- Input box for scaling factor -->
+            <button type="submit">Save</button>
+	<button type="button" onclick="printRecipe()">Print</button>
+
+        </form>
+    </div>
+</section>
+
+    <section id="paste-section" class="section paste-section">
+        <div class="container">
+            <h2>Paste Existing Recipe</h2>
+            <h3> Utilize this feature to paste over existing recipes that you may have saved on your computer or recipes you are interested in from the internet. </h3>
+            <div class="recipe-name-input">
+                <div class="textarea-container">
+                    <textarea id="paste-recipe-text" rows="6" cols="50" placeholder="Paste your recipe here"></textarea>
+                </div>
+                <button type="button" onclick="parseAndPaste()">Parse Recipe</button>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+<section id="saved-recipes" class="">
+    <div class="container">
+        <h2>Saved Recipes</h2>
+        <table id="recipes-table">
+            <thead>
+                <tr>
+                    <th>Recipe Name</th>
+                    <th>Number of Ingredients</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="recipes-list">
+                <!-- Saved recipes will be dynamically added here -->
+            </tbody>
+        </table>
+        <style>
+            /* Add styles for dividing lines between rows and columns in the saved recipes section */
+            #recipes-table {
+                border-collapse: collapse;
+                width: 100%;
+            }
+
+            #recipes-table th,
+            #recipes-table td {
+                border: 2px solid #ccc; /* Add border to cells */
+                padding: 8px;
+            }
+
+            #recipes-table th {
+                background-color: #f2f2f2; /* Background color for table header */
+                text-align: left; /* Align text to the left in header cells */
+            }
+
+           #recipes-table th {
+                background-color: #f2f2f2; /* Background color for table header */
+                text-align: right; /* Align text to the right in header cells */
+            }
+        </style>
+    </div>
+</section>
+
+
+    </main>
+   
+ <footer>
+        <div class="container">
+            <p>&copy; 2024 EcoSavor Solutions. All rights reserved.</p>
+            <address>
+                123 Main Street, City, Country
+            </address>
+            <div class="footer-links">
+                <a href="#">Terms of Service</a> | 
+                <a href="#">Privacy Policy</a>
+            </div>
+        </div>
+    </footer>
+   <script>
+document.getElementById('add-ingredient-button').addEventListener('click', function() {
+    // Add ingredient to the list
+    console.log("Button clicked!");
+    const ingredientsList = document.getElementById('ingredients-list');
+    const newIngredientField = document.createElement('div');
+    newIngredientField.style.display = 'flex'; // Set display to flex
+    newIngredientField.style.alignItems = 'center'; // Align items vertically in the center
+    newIngredientField.style.width = '100%'; // Set fixed width for the container
+    newIngredientField.style.marginBottom = '10px'; // Add margin-bottom for spacing between fields
+    newIngredientField.innerHTML = `
+        <input type="text" name="ingredient-name[]" placeholder="Ingredient Name" required style="flex: 1; height: 30px; margin-right: 10px;">
+        <input type="text" name="ingredient-quantity[]" step="any" placeholder="Qty" required style="width: 100px; height: 30px; margin-right: 10px;">
+        <select name="ingredient-measurement[]" style="width: 100px; height: 30px; margin-right: 10px;">
+            <option value="Each">Each</option>
+            <option value="cups">Cups</option>
+            <option value="oz">Ounces</option>
+            <option value="grams">Grams</option>
+            <option value="gallons">Gallons</option>
+            <option value="lbs">Pounds</option>
+            <option value="teaspoon">Teaspoon</option>
+            <option value="tablespoon">Tablespoon</option>
+            <!-- Add more measurement options as needed -->
+        </select>
+        <button type="button" onclick="removeIngredientField(this)">Remove</button>
+    `;
+    ingredientsList.appendChild(newIngredientField);
+});
+
+    function revertScaling() {
+        const originalRecipeText = document.getElementById('original-recipe-text').textContent;
+        document.getElementById('paste-recipe-text').value = originalRecipeText;
+        parseAndPaste(); // Parse and paste the original recipe
+    }
+
+function removeIngredientField(button) {
+    const ingredientField = button.parentElement;
+    ingredientField.remove();
+}
+
+function clearForm() {
+    document.getElementById('new-recipe-form').reset();
+    const ingredientsList = document.getElementById('ingredients-list');
+    ingredientsList.innerHTML = '';
+}
+
+function saveRecipe(event) {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const recipeData = {};
+    recipeData['recipe-name'] = formData.get('recipe-name');
+    recipeData['recipe-description'] = formData.get('recipe-description');
+    recipeData['ingredients'] = [];
+    const ingredientNames = formData.getAll('ingredient-name[]');
+    const ingredientQuantities = formData.getAll('ingredient-quantity[]');
+    const ingredientMeasurements = formData.getAll('ingredient-measurement[]');
+    const scalingFactor = parseFloat(formData.get('scaling-factor')); // Get the scaling factor
+
+    for (let i = 0; i < ingredientNames.length; i++) {
+        const ingredient = {
+            name: ingredientNames[i],
+            quantity: parseFloat(ingredientQuantities[i]), // Don't scale here
+            measurement: ingredientMeasurements[i]
+        };
+        recipeData['ingredients'].push(ingredient);
+    }
+
+    // Create a copy of the recipe data for scaling and adjust the quantities of ingredients based on the scaling factor
+    const scaledRecipe = { ...recipeData };
+    scaledRecipe['recipe-name'] += " (Scaled)"; // Mark it as a scaled recipe
+    scaledRecipe['ingredients'] = scaledRecipe['ingredients'].map(ingredient => ({
+        ...ingredient,
+        quantity: ingredient.quantity * scalingFactor // Scale the quantity
+    }));
+
+    // Save the scaled recipe as a new one
+    const savedRecipes = JSON.parse(localStorage.getItem('recipes')) || [];
+    savedRecipes.push(scaledRecipe);
+    localStorage.setItem('recipes', JSON.stringify(savedRecipes));
+
+    // After saving, reload the recipes
+    loadRecipes();
+
+    // Clear the form to refresh it
+    clearForm();
+}
+
+
+function loadRecipes() {
+    const savedRecipes = JSON.parse(localStorage.getItem('recipes')) || [];
+    const recipesList = document.getElementById('recipes-list');
+    recipesList.innerHTML = '';
+    savedRecipes.forEach((recipe, index) => {
+        const tr = document.createElement('tr');
+        const tdName = document.createElement('td');
+        tdName.textContent = recipe['recipe-name'];
+        const tdIngredients = document.createElement('td');
+        tdIngredients.textContent = recipe['ingredients'].length;
+        const tdActions = document.createElement('td');
+        const editButton = document.createElement('button');
+        editButton.textContent = 'Edit';
+        editButton.onclick = () => editRecipe(recipe, index);
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = 'Delete';
+        deleteButton.onclick = () => deleteRecipe(index);
+        tdActions.appendChild(editButton);
+        tdActions.appendChild(deleteButton);
+        tr.appendChild(tdName);
+        tr.appendChild(tdIngredients);
+        tr.appendChild(tdActions);
+        recipesList.appendChild(tr);
+    });
+}
+
+
+    function editRecipe(recipe, index) {
+    // Populate the form with the selected recipe's details for editing
+    const recipeNameInput = document.getElementById('recipe-name');
+    recipeNameInput.value = recipe['recipe-name'];
+
+    const recipeDescriptionInput = document.getElementById('recipe-description');
+    recipeDescriptionInput.value = recipe['recipe-description'];
+
+    const ingredientsList = document.getElementById('ingredients-list');
+    ingredientsList.innerHTML = '';
+    recipe['ingredients'].forEach(ingredient => {
+        const newIngredientField = document.createElement('div');
+        newIngredientField.style.display = 'flex'; // Set display to flex
+        newIngredientField.style.alignItems = 'center'; // Align items vertically in the center
+        newIngredientField.style.width = '100%'; // Set fixed width for the container
+        newIngredientField.style.marginBottom = '10px'; // Add margin-bottom for spacing between fields
+        newIngredientField.innerHTML = `
+            <input type="text" name="ingredient-name[]" value="${ingredient.name}" required style="flex: 1; height: 30px; margin-right: 10px;">
+            <input type="text" name="ingredient-quantity[]" step="any" value="${ingredient.quantity}" required style="width: 100px; height: 30px; margin-right: 10px;">
+            <select name="ingredient-measurement[]" style="width: 100px; height: 30px; margin-right: 10px;">
+                <option value="Each" ${ingredient.measurement === 'Each' ? 'selected' : ''}>Each</option>
+                <option value="cups" ${ingredient.measurement === 'cups' ? 'selected' : ''}>Cups</option>
+                <option value="oz" ${ingredient.measurement === 'oz' ? 'selected' : ''}>Ounces</option>
+                <option value="grams" ${ingredient.measurement === 'grams' ? 'selected' : ''}>Grams</option>
+                <option value="gallons" ${ingredient.measurement === 'gallons' ? 'selected' : ''}>Gallons</option>
+                <option value="lbs" ${ingredient.measurement === 'lbs' ? 'selected' : ''}>Pounds</option>
+                <option value="teaspoon" ${ingredient.measurement === 'teaspoon' ? 'selected' : ''}>Teaspoon</option>
+                <option value="tablespoon" ${ingredient.measurement === 'tablespoon' ? 'selected' : ''}>Tablespoon</option>
+                <!-- Add more measurement options as needed -->
+            </select>
+            <button type="button" onclick="removeIngredientField(this)">Remove</button>
+        `;
+        ingredientsList.appendChild(newIngredientField);
+    });
+}
+
+        function deleteRecipe(index) {
+            const savedRecipes = JSON.parse(localStorage.getItem('recipes')) || [];
+            savedRecipes.splice(index, 1);
+            localStorage.setItem('recipes', JSON.stringify(savedRecipes));
+            loadRecipes();
+        }
+
+        // Load saved recipes when the page loads
+        window.onload = function() {
+            loadRecipes();
+        };
+
+        function parseAndPaste() {
+            const recipeText = document.getElementById('paste-recipe-text').value.trim();
+            const lines = recipeText.split('\n').filter(line => line.trim() !== '');
+
+            // Extract recipe name and ingredients
+            const recipeName = lines[0];
+            const ingredients = lines.slice(1);
+
+            // Populate form fields with parsed recipe data
+            document.getElementById('recipe-name').value = recipeName;
+
+            // Clear previous ingredient fields
+            const ingredientsList = document.getElementById('ingredients-list');
+            ingredientsList.innerHTML = '';
+
+            // Add new ingredient fields with parsed ingredients
+            ingredients.forEach(ingredientLine => {
+                // Regex pattern to match quantities with fractions and tenths of a decimal
+                const quantityRegex = /^(\d+(\.\d+)?|(\d+\s)?\d+\/\d+)$/;
+
+                // Extracting quantity and name parts from the ingredient line
+                const parts = ingredientLine.split(' ');
+                let quantityStr = '';
+                let nameParts = [];
+
+                // Loop through each part to find the quantity and name parts
+                for (const part of parts) {
+                    if (quantityRegex.test(part) || !isNaN(part)) {
+                        // If the part is a number or matches the quantity regex, it's the quantity
+                        quantityStr += part + ' ';
+                    } else {
+                        // If it's not a number, it's part of the ingredient name
+                        nameParts.push(part);
+                    }
+                }
+
+                // Convert the quantity string to a number
+                const quantity = eval(quantityStr.trim());
+
+                // Join the name parts to form the ingredient name
+                const name = nameParts.join(' ');
+
+                // Look for known measurement units in the name
+                const knownUnits = ['cups', 'oz', 'grams', 'gallons', 'lbs', 'teaspoon', 'tablespoon'];
+                let measurement = 'Each'; // Default measurement
+                for (const unit of knownUnits) {
+                    if (name.includes(unit)) {
+                        measurement = unit;
+                        break;
+                    }
+                }
+
+                // Create new ingredient field
+                const newIngredientField = document.createElement('div');
+                newIngredientField.innerHTML = `
+                    <input type="text" name="ingredient-name[]" value="${name}" required style="width: 50%; height: 30px; margin-right: 10px;">
+                    <input type="text" name="ingredient-quantity[]" step="any" value="${quantity}" required style="width: 30%; height: 30px; margin-right: 10px;">
+                    <select name="ingredient-measurement[]">
+                        <option value="Each" ${measurement === 'Each' ? 'selected' : ''}>Each</option>
+                        <option value="cups" ${measurement === 'cups' ? 'selected' : ''}>Cups</option>
+                        <option value="oz" ${measurement === 'oz' ? 'selected' : ''}>Ounces</option>
+                        <option value="grams" ${measurement === 'grams' ? 'selected' : ''}>Grams</option>
+                        <option value="gallons" ${measurement === 'gallons' ? 'selected' : ''}>Gallons</option>
+                        <option value="lbs" ${measurement === 'lbs' ? 'selected' : ''}>Pounds</option>
+                        <option value="teaspoon" ${measurement === 'teaspoon' ? 'selected' : ''}>Teaspoon</option>
+                        <option value="tablespoon" ${measurement === 'tablespoon' ? 'selected' : ''}>Tablespoon</option>
+                        <!-- Add more measurement options as needed -->
+                    </select>
+                    <button type="button" onclick="removeIngredientField(this)">Remove</button>
+                `;
+                ingredientsList.appendChild(newIngredientField);
+            });
+        }
+
+function printRecipe() {
+    const recipeName = document.getElementById('recipe-name').value;
+    const recipeDescription = document.getElementById('recipe-description').value;
+    const ingredients = document.querySelectorAll('[name^="ingredient-name"]');
+    let ingredientsText = 'Ingredients:\n';
+    ingredients.forEach((ingredient, index) => {
+        const quantity = document.querySelectorAll('[name^="ingredient-quantity"]')[index].value;
+        const measurement = document.querySelectorAll('[name^="ingredient-measurement"]')[index].value;
+        ingredientsText += `${index + 1}. ${quantity} ${measurement} ${ingredient.value}\n`;
+    });
+
+    const recipeText = `${recipeName}\n\n${recipeDescription}\n\n${ingredientsText}`;
+
+    // Open a new window to print just the recipe
+    const printWindow = window.open('', '_blank', 'width=600,height=600');
+    printWindow.document.write('<html><head><title>Print Recipe</title></head><body>');
+    printWindow.document.write('<pre>' + recipeText + '</pre>');
+    printWindow.document.write('</body></html>');
+    printWindow.document.close();
+
+    // Print the recipe in the new window
+    printWindow.print();
+}
+
+
+
+
+function logout() {
+            // Add logout logic here (e.g., clear session data or redirect to login page)
+            // For demonstration, redirect to login page after 1 second
+            setTimeout(() => {
+                window.location.href = "login.html"; // Redirect to login page
+            }, 1000);
+        }
+
+    </script>
+</body>
+</html>

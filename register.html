@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - EcoSavor Solutions</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            overflow: hidden; /* Hide scrollbar for animation */
+        }
+
+        /* Background animation */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #ff00cc, #3333ff, #ff0066, #33ccff);
+            background-size: 400% 400%;
+            opacity: .8;
+            animation: gradient 15s ease infinite;
+            z-index: -1; /* Ensure the background is behind other content */
+        }
+
+        .animated-bg::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("BG ESS.jpg");
+            background-size: cover;
+            opacity: 0.5; /* Adjust the opacity as needed */
+            z-index: -1; /* Ensure the background is behind other content */
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 1);
+            position: relative; /* Ensure content container stays above background */
+            z-index: 1; /* Ensure content container is above background */
+            text-align: center; /* Center the content */
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.3); /* Semi-transparent black background */
+            backdrop-filter: blur(10px); /* Apply the blur effect */
+            border-radius: inherit; /* Inherit the border-radius from the container */
+            z-index: -1; /* Ensure the pseudo-element is behind the content */
+        }
+
+        h2 {
+            color: white; /* Change text color to white */
+            margin-bottom: 20px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        select {
+            width: 93%;
+            padding: 10px;
+            margin-top: 10px;
+            margin-bottom: 20px; /* Add margin bottom for spacing */
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+            outline: none;
+        }
+
+        input[type="submit"],
+        button {
+            width: 100%;
+            background-color: #4CAF50;
+            padding: 10px 20px;
+            margin: 20px 0;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            color: white;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        input[type="submit"]:hover,
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .login-link {
+            text-align: center;
+            color: white; /* Change text color to white */
+        }
+
+        .login-link a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="animated-bg"></div>
+    <div class="container">
+        <h2>Register an Account</h2>
+        <form id="registerForm" onsubmit="register(event)">
+            <!-- Registration form fields -->
+            <input type="text" id="username" name="username" placeholder="Username" required><br>
+            <input type="email" id="email" name="email" placeholder="Email" required><br>
+            <input type="password" id="password" name="password" placeholder="Password" required><br>
+
+            <!-- Subscription plan selection -->
+            <label for="subscriptionPlan">Choose a subscription plan:</label><br>
+            <select id="subscriptionPlan" name="subscriptionPlan" required>
+                <option value="Home">Home - $6.99/month</option>
+                <option value="Business Basic">Business Basic - $89.95/month</option>
+                <option value="Business Unlimited">Business Unlimited - $139.95/month</option>
+            </select><br>
+
+
+            <button type="submit">Register</button>
+        </form>
+        <div class="login-link">
+            <h2>Already have an account?</h2> <a href="login.html">Login here</a>
+        </div>
+    </div>
+
+    <script>
+        function register(event) {
+            event.preventDefault(); // Prevent form submission
+
+            // Retrieve registration data
+            const username = document.getElementById("username").value;
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            const subscriptionPlan = document.getElementById("subscriptionPlan").value;
+
+            // Simulate registration process (store data in localStorage for demonstration)
+            const userData = {
+                username: username,
+                email: email,
+                password: password,
+                subscriptionPlan: subscriptionPlan
+            };
+            localStorage.setItem("userData", JSON.stringify(userData));
+
+            // For demonstration, redirect to payment page after registration is complete
+            setTimeout(() => {
+                // Redirect to payment page
+                window.location.href = "payment.html";
+            }, 1000); // Simulating 1 second delay for registration process
+        }
+    </script>
+</body>
+</html>

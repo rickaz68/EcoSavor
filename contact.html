@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+.logo img {
+    width: 50px;
+    height: 50px;
+    vertical-align: middle;
+}
+
+.logo h1 {
+    display: inline;
+    margin-left: 10px;
+}
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .contact-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 30px;
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-container h2 {
+            margin-top: 0;
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .contact-container p {
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .contact-container ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .contact-container ul li {
+            margin-bottom: 10px;
+            color: #777;
+        }
+
+        .contact-form label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .contact-form button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .contact-form button:hover {
+            background-color: #0056b3;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        footer a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header class="hero">
+        <div class="container">
+            <div class="logo">
+                <img src="C:\Users\Ricar\Desktop\index.html\photos\Savor.png" alt="EcoSavor Solutions Logo">
+                <h1>EcoSavor Solutions</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="recipes.html">Recipes</a></li>
+                    <li><a href="pantry.html">Pantry</a></li>
+                    <li><a href="waste.html">Waste Reduction</a></li>
+                    <li><a href="community.html">Community</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="features.html">Features & Pricing</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="#" onclick="logout()">Logout</a></li> <!-- Logout link -->
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <section id="contact" class="section">
+            <div class="container contact-container">
+                <h2>Contact Us</h2>
+                <p>Have questions or feedback? We'd love to hear from you!</p>
+                <ul>
+                    <li>Email: info@ecosavor.com</li>
+                    <li>Phone: 1-800-ECO-SAVER</li>
+                    <li>Address: 123 Main Street, City, Country</li>
+                </ul>
+                <form id="contact-form" class="contact-form" action="#" method="POST">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+                    
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                    
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message" rows="4" required></textarea>
+                    
+                    <button type="submit">Send Message</button>
+                </form>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 EcoSavor Solutions. All rights reserved.</p>
+            <address>
+                123 Main Street, City, Country
+            </address>
+            <div class="footer-links">
+                <a href="#">Terms of Service</a> | 
+                <a href="#">Privacy Policy</a>
+            </div>
+        </div>
+    </footer>
+    <script>
+        function logout() {
+            setTimeout(() => {
+                window.location.href = "login.html";
+            }, 1000);
+        }
+    </script>
+</body>
+</html>

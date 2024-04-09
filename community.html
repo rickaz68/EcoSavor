@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community</title>
+    <link rel="stylesheet" href="styles.css">
+ <style>
+        /* General styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1, h2 {
+            color: #333;
+        }
+
+        /* Card styles */
+        .bard {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 20px;
+            padding: 20px;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .bard:hover {
+            transform: translateY(-5px);
+        }
+
+        .bard h2 {
+            margin-bottom: 10px;
+        }
+
+        /* Form styles */
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            margin-bottom: 10px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+.logo img {
+    width: 50px;
+    height: 50px;
+    vertical-align: middle;
+}
+
+.logo h1 {
+    display: inline;
+    margin-left: 10px;
+}
+    </style>
+    </style>
+</head>
+<body class="home-page1">
+    <header class="hero">
+        <div class="container">
+            <div class="logo">
+                <img src="C:\Users\Ricar\Desktop\index.html\photos\Savor.png" alt="EcoSavor Solutions Logo">
+                <h1>EcoSavor Solutions</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="recipes.html">Recipes</a></li>
+                    <li><a href="pantry.html">Pantry</a></li>
+                    <li><a href="waste.html">Waste Reduction</a></li>
+                    <li><a href="community.html">Community</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="features.html">Features & Pricing</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="#" onclick="logout()">Logout</a></li> <!-- Logout link -->
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <div class="bard" id="recipeSharing" onclick="toggleForm('recipeForm')">
+                <h2>Recipe Sharing</h2>
+                <form id="recipeForm" style="display: none;">
+                    <label for="recipeName">Recipe Name:</label>
+                    <input type="text" id="recipeName" name="recipeName" required>
+                    <label for="ingredients">Ingredients:</label>
+                    <textarea id="ingredients" name="ingredients" required></textarea>
+                    <label for="instructions">Instructions:</label>
+                    <textarea id="instructions" name="instructions" required></textarea>
+                    <input type="file" id="photo" name="photo" accept="image/*">
+                    <button type="submit" onclick="submitRecipe(event)">Submit</button>
+                </form>
+            </div>
+
+            <div class="bard" id="discussionForums" onclick="toggleForm('forumThreadForm')">
+                <h2>Discussion Forums</h2>
+                <form id="forumThreadForm" style="display: none;">
+                    <label for="threadTitle">Thread Title:</label>
+                    <input type="text" id="threadTitle" name="threadTitle" required>
+                    <label for="threadContent">Thread Content:</label>
+                    <textarea id="threadContent" name="threadContent" required></textarea>
+                    <button type="submit" onclick="createForumThread(event)">Create Thread</button>
+                </form>
+            </div>
+
+            <div class="bard" id="pollsSurveys" onclick="toggleForm('pollForm')">
+                <h2>Polls and Surveys</h2>
+                <form id="pollForm" style="display: none;">
+                    <p>How often do you cook at home?</p>
+                    <label><input type="radio" name="pollOption" value="daily"> Daily</label><br>
+                    <label><input type="radio" name="pollOption" value="weekly"> Weekly</label><br>
+                    <label><input type="radio" name="pollOption" value="monthly"> Monthly</label><br>
+                    <button type="submit" onclick="submitPollResponse(event)">Submit</button>
+                </form>
+            </div>
+
+            <div class="bard" id="feedbackSuggestions" onclick="toggleForm('feedbackForm')">
+                <h2>Feedback and Suggestions</h2>
+                <form id="feedbackForm" style="display: none;">
+                    <label for="feedback">Your Feedback:</label>
+                    <textarea id="feedback" name="feedback" required></textarea>
+                    <button type="submit" onclick="submitFeedback(event)">Submit</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 EcoSavor Solutions. All rights reserved.</p>
+            <address>
+                123 Main Street, City, Country
+            </address>
+            <div class="footer-links">
+                <a href="#">Terms of Service</a> | 
+                <a href="#">Privacy Policy</a>
+            </div>
+        </div>
+    </footer>
+  <script>
+        // Function to toggle the visibility of the form
+        function toggleForm(formId) {
+            const form = document.getElementById(formId);
+            form.style.display = form.style.display === "none" ? "block" : "none";
+        }
+
+        // Function to handle recipe submission
+        function submitRecipe(event) {
+            event.preventDefault(); // Prevent form submission
+
+            // Get form values
+            const recipeName = document.getElementById("recipeName").value;
+            const ingredients = document.getElementById("ingredients").value;
+            const instructions = document.getElementById("instructions").value;
+            const photo = document.getElementById("photo").files[0]; // Assuming input type file for photo upload
+
+            // Add logic to handle recipe submission (e.g., send data to server, store in database)
+
+            // Clear form fields
+            document.getElementById("recipeForm").reset();
+
+            // Optional: Display success message or update UI
+            alert("Recipe submitted successfully!");
+        }
+
+        // Function to create a new forum thread
+        function createForumThread(event) {
+            event.preventDefault(); // Prevent form submission
+
+            // Get thread title and content
+            const threadTitle = document.getElementById("threadTitle").value;
+            const threadContent = document.getElementById("threadContent").value;
+
+            // Add logic to create a new thread (e.g., send data to server, store in database)
+
+            // Clear form fields
+            document.getElementById("forumThreadForm").reset();
+
+            // Optional: Display success message or update UI
+            alert("Thread created successfully!");
+        }
+
+        // Function to submit a poll response
+        function submitPollResponse(event) {
+            event.preventDefault(); // Prevent form submission
+
+            // Get selected option
+            const selectedOption = document.querySelector('input[name="pollOption"]:checked').value;
+
+            // Add logic to handle poll response (e.g., send data to server, store in database)
+
+            // Optional: Display success message or update UI
+            alert("Response submitted successfully!");
+        }
+
+        // Function to submit feedback or suggestion
+        function submitFeedback(event) {
+            event.preventDefault(); // Prevent form submission
+
+            // Get feedback/suggestion from user
+            const feedback = document.getElementById("feedback").value;
+
+            // Add logic to handle feedback (e.g., send data to server, store in database)
+
+            // Clear form field
+            document.getElementById("feedbackForm").reset();
+
+            // Optional: Display success message or update UI
+            alert("Feedback submitted successfully!");
+        }
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background-color: #eeeeea;
+}
+
+.logo img {
+    width: 50px;
+    height: 50px;
+    vertical-align: middle;
+}
+
+.logo h1 {
+    display: inline;
+    margin-left: 10px;
+}
+
+    </style>
+</head>
+<body class="home-page">
+    <header class="hero">
+        <div class="container">
+            <div class="logo">
+                <img src="C:\Users\Ricar\Desktop\index.html\photos\Savor.png" alt="EcoSavor Solutions Logo">
+                <h1>EcoSavor Solutions</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="recipes.html">Recipes</a></li>
+                    <li><a href="pantry.html">Pantry</a></li>
+                    <li><a href="waste.html">Waste Reduction</a></li>
+                    <li><a href="community.html">Community</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="features.html">Features & Pricing</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="#" onclick="logout()">Logout</a></li> <!-- Logout link -->
+                </ul>
+            </nav>
+        </div>
+    </header>
+<main>
+               <section id="recipe-form" class="section">
+            <div class="container">
+<h3>Welcome to EcoSavor Solutions, a comoprehensive and user-friendly product management system optimized for the food and beverage industry.</h3>
+                            </div>
+    <div class="wrapper">
+	<div 'class="move-up1"' 'class="container"' id="container1">
+            <input type="radio" name="slide" id="c1" checked>
+            <label for="c1" class="card">
+                <div class="row">
+                    <div class="icon">1</div>
+                    <div class="description">                      
+			<h4>Recipes</h4>
+                        <p class="move-up"> A comprehensive feature designed to streamline the process of storing, editing, and adjusting recipes.</p>
+                    </div>
+                </div>
+            </label>
+            <input type="radio" name="slide" id="c2">
+            <label for="c2" class="card">
+                <div class="row">
+                    <div class="icon">2</div>
+                    <div class="description">
+                        <h4>Pantry Managment</h4>
+                        <p class="move-up">Efficiently organize your pantry & receive notifications for expiring items.</p>
+                    </div>
+                </div>
+            </label>
+            <input type="radio" name="slide" id="c3">
+            <label for="c3" class="card">
+                <div class="row">
+                    <div class="icon">3</div>
+                    <div class="description">
+                        <h4>Waste Reduction</h4>
+                        <p class="move-up">Take control of your food waste with our Waste Reduction Tools.</p>
+                    </div>
+                </div>
+            </label>
+            <input type="radio" name="slide" id="c4">
+            <label for="c4" class="card">
+                <div class="row">
+                    <div class="icon">4</div>
+                    <div class="description">
+                        <h4>Community</h4>
+                        <p class="move-up">Connect with like-minded individuals, share your favorite recipes, tips, and tricks.</p>
+
+
+    <script>
+
+function logout() {
+            // Add logout logic here (e.g., clear session data or redirect to login page)
+            // For demonstration, redirect to login page after 1 second
+            setTimeout(() => {
+                window.location.href = "login.html"; // Redirect to login page
+            }, 1000);
+        }
+    </script>
+                    </div>
+                </div>
+            </label>
+        </div>
+    </div>
+</main>
+</body>
+</html>

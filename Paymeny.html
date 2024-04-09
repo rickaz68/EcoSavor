@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Processing - EcoSavor Solutions</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            overflow: hidden; /* Hide scrollbar for animation */
+        }
+
+        /* Background animation */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #ff00cc, #3333ff, #ff0066, #33ccff);
+            background-size: 400% 400%;
+            opacity: .8;
+            animation: gradient 15s ease infinite;
+            z-index: -1; /* Ensure the background is behind other content */
+        }
+
+        .animated-bg::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("BG ESS.jpg");
+            background-size: cover;
+            opacity: 0.5; /* Adjust the opacity as needed */
+            z-index: -1; /* Ensure the background is behind other content */
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 1);
+            position: relative; /* Ensure content container stays above background */
+            z-index: 1; /* Ensure content container is above background */
+            text-align: center; /* Center the content */
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.3); /* Semi-transparent black background */
+            backdrop-filter: blur(10px); /* Apply the blur effect */
+            border-radius: inherit; /* Inherit the border-radius from the container */
+            z-index: -1; /* Ensure the pseudo-element is behind the content */
+        }
+
+        h2 {
+            color: white; /* Change text color to white */
+            margin-bottom: 20px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        select {
+            width: 93%;
+            padding: 10px;
+            margin-top: 10px;
+            margin-bottom: 20px; /* Add margin bottom for spacing */
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+            outline: none;
+        }
+
+        input[type="submit"],
+        button {
+            width: 100%;
+            background-color: #4CAF50;
+            padding: 10px 20px;
+            margin: 20px 0;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            color: white;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        input[type="submit"]:hover,
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .login-link {
+            text-align: center;
+            color: white; /* Change text color to white */
+        }
+
+        .login-link a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="animated-bg"></div>
+    <div class="container">
+        <!-- Payment Processing Section -->
+        <div id="payment-section">
+            <h2>Payment Processing</h2>
+            <!-- Payment form fields -->
+            <input type="text" id="card-number" placeholder="Card Number" required><br>
+            <input type="text" id="expiry-date" placeholder="Expiry Date" required><br>
+            <input type="text" id="cvv" placeholder="CVV" required><br>
+            <button onclick="processPayment()">Pay Now</button>
+
+<button onclick="startNewTransaction()">New Transaction</button>
+        </div>
+    </div>
+
+ <script>
+        // Retrieve registration data from localStorage
+        const userData = JSON.parse(localStorage.getItem("userData"));
+
+        // Display payment details
+        if (userData) {
+            const paymentDetails = document.getElementById("payment-details");
+            paymentDetails.innerHTML = `
+                <p><strong>Username:</strong> ${userData.username}</p>
+                <p><strong>Email:</strong> ${userData.email}</p>
+                <p><strong>Subscription Plan:</strong> ${userData.subscriptionPlan}</p>
+                <p><strong>Amount:</strong> $${getSubscriptionPrice(userData.subscriptionPlan)}/month</p>
+                <!-- You can add payment form fields and payment processing logic here -->
+            `;
+        } else {
+            // If registration data is not found, display error message
+            const paymentDetails = document.getElementById("payment-details");
+            paymentDetails.innerHTML = "<p>Error: Registration data not found.</p>";
+        }
+
+        // Function to get subscription price based on plan
+        function getSubscriptionPrice(plan) {
+            switch (plan) {
+                case "Home":
+                    return 6.99;
+                case "Business Basic":
+                    return 89.99;
+                case "Business Unlimited":
+                    return 139.99;
+                default:
+                    return 0; // Default to 0 if plan is not recognized
+            }
+        }
+
+function startNewTransaction() {
+    // Clear the cart by removing all items
+    var cart = document.getElementById("cart-items");
+    cart.innerHTML = "";
+
+    // Reset the total to $0
+    var totalElement = document.getElementById("total");
+    totalElement.textContent = "Total: $0";
+
+    // Increment the inventory count for each item in the cart
+    var inventory = JSON.parse(localStorage.getItem(POS_STORAGE_KEY));
+    if (inventory) {
+        var cartItems = cart.querySelectorAll("li");
+        cartItems.forEach(function(cartItem) {
+            var itemName = cartItem.textContent.split(" - ")[0]; // Extract item name
+            var item = inventory.find(function(i) {
+                return i.name === itemName;
+            });
+            if (item) {
+                item.quantity++; // Increment item quantity in the inventory
+            }
+        });
+
+        // Save the updated inventory to localStorage
+        localStorage.setItem(POS_STORAGE_KEY, JSON.stringify(inventory));
+
+        // Render the updated inventory
+        renderInventory();
+    }
+}
+
+    </script>
+</body>
+</html>
